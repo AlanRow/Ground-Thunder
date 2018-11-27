@@ -14,8 +14,8 @@ class FieldCanvas : Canvas{
     }
 
     override fun paint(g: Graphics){
-        println("I draw... ")
-
+        //println("I draw... ")
+        //val g = this.graphics
         val cellWidth = width / state.map.width
         val cellHeight = height / state.map.height
 

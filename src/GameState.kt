@@ -51,23 +51,34 @@ class GameState(val map : Array<Array<Terrain>>, val unitMap : Array<Array<Unit?
         }
 
         println("Then must be drawing...")
-        win.paint(win.graphics)
+        win.revalidate()
+        win.repaint()
     }
 
     private fun turn(){
+        for (j in 0 until map.height) {
+            for (i in 0 until map.width) {
+                val cell = if (unitMap[j][i] == null) '0' else if (unitMap[j][i]!!.Element == Element.Thunder) 'T' else 'G'
+                print(cell)
+            }
+            println()
+        }
+        for (i in 0 until map.width){
+            print("-")
+        }
+        println()
         units.enqueue(units.dequeue())
     }
 
     private fun moveGround(dir: Move){
+
         val dist = current!!.Position.shift(dir)
 
         if (unitMap[dist.Y][dist.X] != null) {
             when (unitMap[dist.Y][dist.X]!!.Element) {
-                Element.Ground -> return
-                Element.Thunder -> {
-                    units.delete(unitMap[dist.Y][dist.X])
+                    Element.Ground -> return
+                    Element.Thunder -> units.delete(unitMap[dist.Y][dist.X])
                 }
-            }
         }
 
         if (map[dist.Y][dist.X] == Terrain.Electro)
