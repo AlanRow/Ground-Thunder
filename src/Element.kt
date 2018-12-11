@@ -1,6 +1,5 @@
 package pack
 
-
 enum class Element {
-    Ground, Thunder
+    Ground, Thunder, None
 }
